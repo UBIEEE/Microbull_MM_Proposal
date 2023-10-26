@@ -7,8 +7,16 @@ The overview should be a general description of your project. This should be a h
 ### Software Plan
 This should be a more detailed explanation of how your software will work. This should include the programming language(s) you will be using, any libraries, what IDE(s) you will be working with, your approach for testing your software, and how you will be using the inputs from your hardware to complete your task.
 
+The Microbull will be programmed using Python 3 and ROS2. We will be using ROS2 controller libraries to interface with the motors. There will be ROS2 nodes for: the maze-solving algorithm (which will be using floodfill), the position-determining algorithm, and the motor-control algorithm. The nodes will communicate over the following ROS topics: current position, requested position, drive output, and encoder feedback. 
+
+The __Node__ Position Determiner will: output to __Topic__ `current position`, output to __Topic__ `drive output`, listen to __Topic__ `requested position`, listen to __Topic__ `encoder feedback`. 
+
+The __Node__ Motor Driver will: output to __Topic__ `encoder feedback`, listen to __Topic__ `drive output`. 
+
+The __Node__ Flood Fill will: output to __Topic__ `requested position`, listen to __Topic__ `current position`. 
+
 ### Hardware Plan
-This should be a more detailed explanation of how your hardware will work. This should include the electrical requirements of all the individual components of your system and how those requirements will be managed. This should also include a detailed explanation of the hardware components of your system and how they will interact with each other. This should include a detailed explanation of the sensors you will be using, how they work, and how you will be using them to complete your task. This should also include specifications of your components, including the voltage/current ranges they support as well as their physical dimensions (when applicable). 
+This should be a more detailed explanation of how your hardware will work. This should include the electrical requirements of all the individual components of your system and how those requirements will be managed. This should also include a detailed explanation of the hardware components of your system and how they will interact with each other. This should include a detailed explanation of the sensors you will be using, how they work, and how you will be using them to complete your task. This should also include specifications of your components, including the voltage/current ranges they support as well as their physical dimensions (when applicable).
 
 ## Flowchart of System Design
 
@@ -22,16 +30,16 @@ Please include a flowchart of your system design. This should include the hardwa
 
 | Item Name w/Link | Cost per Unit | # of Units | Total Cost |
 | ---- | ---------------- | ---- | ---------------- |
-| [ARDUINO UNO R4 MINIMA](https://www.digikey.com/en/products/detail/arduino/ABX00080/20371542) | $20.00 | 1 | $20.00 |
+| [Rasberry Pi 4B 4GB](https://www.digikey.com/en/products/detail/raspberry-pi/SC0194-9/10258781) | $55.00 | 1 | $55.00 |
 | [Ultrasonic Distance Sensor - 3V or 5V - HC-SR04 compatible - RCWL-1601](https://www.adafruit.com/product/4007) | $3.95 | 4 | $15.80 |
 | [USB Li-Ion Power Bank with 2 x 5V Outputs @ 2.1A - 5000mAh](https://www.adafruit.com/product/4288) | $26.95 | 1 | $26.95 |
 | [DC Gearbox Motor - "TT Motor" - 200RPM - 3 to 6VDC](https://www.adafruit.com/product/3777?gad_source=1) | $2.95 | 4 | $11.80 |
 | [Adafruit DRV8833 DC/Stepper Motor Driver Breakout Board](https://www.adafruit.com/product/3297) | $5.95 | 2 | $11.90 |
-| | | **Total** | **$121.45** |
+| | | **Total** | **$** |
 
 ### Custom Creation
 
-1. Wheels - 3D printed. 
+1. Wheels - 3D printed.
 3. Chassis - 3D printed.
 4. Compute Casing for Raspberry Pi and battery - 3D printed.
 
@@ -47,39 +55,45 @@ This should be a series of images from multiple angles of a to scale model of yo
 
 ## Teammates and Responsibilities
 
-### Name 1
-Each name should include a brief one paragraph descriptions of the teammates primary responsibilities. 
+### Eric 
+Will create the ROS2 software setup. Will program the sensing, control, and maze-solving algorithms. Will test the program. 
 
-### Name 2     
-Will manage the power supply circuitry and the motor control circuitry. Responsible for ensuring that the Arduino and motor controllers are both properly powered from the battery but are on separate circuits with the proper voltages and currents. 
+### Ben   
+Will assist in python programming for the software stack including software-hardware integratino with the motors and encoders. Will manage the power supply circuitry and the motor control circuitry. Responsible for ensuring that the Arduino and motor controllers are both properly powered from the battery but are on separate circuits with the proper voltages and currents. 
 
-### Name 3
-...
+### Jared
+Responsible for 3D modelling and 3D printing of parts including the omniwheels, the chassis, and the holders for the Pi and power pack. Responsible for wiring and manging circuitry. 
+
+### Margaret
+Responsible for wiring and manging circuitry. Will manage the power supply circuitry and the motor control circuitry. Responsible for ensuring that the Arduino and motor controllers are both properly powered from the battery but are on separate circuits with the proper voltages and currents. 
 
 ## Milestones
 
 ### Milestone Set 1: 11/8/23
 
-* Get GPIO output from the microcontroller to light up LEDs on a breadboard. 
-* Get GPIO input from the microcontroller to read button presses on a breadboard.
-* Get GPIO input from the microcontroller to read sensor data from the ultrasonic sensors.
+* Get GPIO output from the pi to light up LEDs on a breadboard. 
+* Get GPIO input from the pi to read button presses on a button.
+* Get GPIO input from the pi to read sensor data from the ultrasonic sensors.
 * Initial 3D Model for chassis completed.
 
 ### Milestone Set 2: 11/22/23
 * Get the algorithm working in simulation. 
-* Positioning algorithm can properly visualize mouse in simulation.
+* Positioning algorithm can properly identify where mouse is within a single maze cell.
 * Can make the motors spin from the battery.
 
 ### Milestone Set 3: 11/29/23
-* Microcontroller can control the motors. 
-* Microcontroller can read sensor data and calculate the position of the mouse.
-* Microcontroller can run the algorithm.
+* Pi can make the motors spin in both directions. 
+* Pi can read sensor data and calculate the position of the mouse when moving thorugh corridors of the maze. 
+* Firmware can control the motors and receive input from encoders to properly move the mouse as instructed.
+* Mouse can move forward, backward, to the left, and to the right. 
+
 
 ### Milestone Set 4: 1/10/24
-* Mouse can move in a straight line a stop when it reaches an obstacle.
+* Mouse can move in a straight line and stop when it reaches an obstacle.
 * Mouse can turn 90 degrees when told to by the algorithm.
 * Mouse can move for 10 minutes straight. 
 * Mouse can execute different algorithms based on user inputs from physical buttons on the mouse. 
+* Flood fill working on Rasberry Pi in firmware and works in simulation. 
 
 ### Milestone Set 5: 1/24/24
 * Mouse can move through a maze randomly without hitting walls.

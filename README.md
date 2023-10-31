@@ -5,8 +5,6 @@
 The overview should be a general description of your project. This should be a high level overview of your design decisions and how you will implement them, including detailed information on how you will handle difficulties such as software and hardware integration. This should also contain information on the hardware including references to the electrical requirements of all the individual components of your system and how those requirements will be managed. You should also discuss what kind of software you will be running, undergo a brief analysis to show you have the compute power to run your software, and discuss how the software will use the inputs your hardware gives it to complete its task. 
 
 ### Software Plan
-This should be a more detailed explanation of how your software will work. This should include the programming language(s) you will be using, any libraries, what IDE(s) you will be working with, your approach for testing your software, and how you will be using the inputs from your hardware to complete your task.
-
 The Microbull will be programmed using Python 3 and ROS2. We will be using ROS2 controller libraries to interface with the motors. There will be ROS2 nodes for: the maze-solving algorithm (which will be using floodfill), the position-determining algorithm, and the motor-control algorithm. The nodes will communicate over the following ROS topics: current position, requested position, drive output, and encoder feedback. 
 
 The __Node__ Position Determiner will: output to __Topic__ `current position`, output to __Topic__ `drive output`, listen to __Topic__ `requested position`, listen to __Topic__ `encoder feedback`. 
@@ -23,8 +21,6 @@ This should be a more detailed explanation of how your hardware will work. This 
 ![Flowchart of System Design](images/MicroBullProposalFlowchart.png)
 
 ## Parts and Costs
-
->Note: Please try to get purchases from [SA's list of approved vendors](https://safe.sa.buffalo.edu/vendors/preferred).If you need a part that you cannot get from a company on the list it will be much more difficult to the purchase approved if at all. We recommend you check out [Adafruit](https://www.adafruit.com/) and [DigiKey](https://www.digikey.com/) for parts.
 
 ### Purchases
 
@@ -47,7 +43,6 @@ This should be a more detailed explanation of how your hardware will work. This 
 
 1. Wires
 2. Breadboard
-3. ...
 
 ## 3D Model
 
@@ -55,10 +50,10 @@ Our model consists of a basic square chassis, four motors attached to gearboxes,
 a Raspberry Pi 4, an Adafruit battery bank, four ultrasonic sensors, and four wheels. The wheels on the model only represent the size and occupation area of the real wheels which will be mecanum wheels.
 
 Isometric View:
-![3D_Model](images\3D_Model.png)
+![3D_Model](images/3D_Model.png)
 
 Top-Down View:
-![3D_Model_Top](images\3D_Model_Top.png)
+![3D_Model_Top](images/3D_Model_Top.png)
 
 ## Teammates and Responsibilities
 

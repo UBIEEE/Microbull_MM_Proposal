@@ -66,7 +66,7 @@ In order to make sense of the hardware plan for the Microbull, components shall 
 
 ## Flowchart of System Design
 
-![Flowchart of System Design](images/MicroBullProposalFlowchart.png)
+![Flowchart of System Design](images/MicroBullProposalFlowchart_rev1.png)
 
 ## Parts and Costs
 

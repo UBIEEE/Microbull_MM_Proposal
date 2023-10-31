@@ -1,4 +1,4 @@
-# Micromouse_Proposal_Example
+# Microbull Proposal
 
 ## Overview
 

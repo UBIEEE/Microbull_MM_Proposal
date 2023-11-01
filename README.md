@@ -14,7 +14,55 @@ The __Node__ Motor Driver will: output to __Topic__ `encoder feedback`, listen t
 The __Node__ Flood Fill will: output to __Topic__ `requested position`, listen to __Topic__ `current position`. 
 
 ### Hardware Plan
-This should be a more detailed explanation of how your hardware will work. This should include the electrical requirements of all the individual components of your system and how those requirements will be managed. This should also include a detailed explanation of the hardware components of your system and how they will interact with each other. This should include a detailed explanation of the sensors you will be using, how they work, and how you will be using them to complete your task. This should also include specifications of your components, including the voltage/current ranges they support as well as their physical dimensions (when applicable).
+In order to make sense of the hardware plan for the Microbull, components shall be introduced in terms of voltage requirements, physical dimensions, communication protocol, function, and how they interface to other components.
+
+1. __Raspberry Pi 4 Model B:__
+    * Input Voltage: 5V @ 3A
+    * Output Voltage: 3V3 @ 50mA
+    * Dimension: 85.60 * 56.5 * 17.0 mm
+    * Communication: GPIO for sensors and motor drivers.
+    * Function: This is the "brain" of the Microbull. It's responsible for processing data from the ultrasonic sensors, controlling gearbox motors, and making decisions.
+
+2. __Ultrasonic Sensor:__
+    * Input Voltage: 5V @ 15mA
+    * Output Voltage: 3V for __Trigger__ signal and 5V for __Echo__ signal
+    * Dimension: 40.0 * 18.0 * 15.0 mm
+    * Communication: Trigger and Echo pins for communication with the Raspberry Pi using a pulse-based protocol for distance measurement.
+    * Function: Detect objects and obstacles, and measure distances using ultrasonic waves.
+
+3. __Motor Drivers:__
+    * Input Voltage: 6V @ 1A
+    * Output Voltage: 6V @ 1A
+    * Dimension: 26.0 * 18.0 * 3.0 mm
+    * Communication: GPIO and PWM signal for speed and direction pins.
+    * Function: Control the direction and speed of the gearbox motors. Convert logic-level (3V3) control signals from the Raspberry Pi to motor power (6V).
+
+4. __Power Bank:__
+    * Input Voltage: 5V @ 2A
+    * Output Voltage 5V @ 2.1A
+    * Dimension: 90.0 * 63.0 * 12.5 mm
+    * Communication: N/A
+    * Function: provide portable power for the Raspberry Pi, sensors, and motor drivers.
+
+5. __DC-DC Converter:__
+    * Input Voltage: 5V @ 1.6A
+    * Output Voltage 6V @ 1.2A
+    * Dimension: 8.13 * 13.08 mm
+    * Communication: N/A
+    * Function: Steps up the voltage to provide regulated power to the motor driver.
+
+6. __Gearbox Motors:__
+    * Input Voltage: 6V @ 150mA
+    * Output Voltage: N/A
+    * Dimension: 70 * 22 * 18 mm
+    * Communication: N/A
+    * Function: Drive wheels for Microbull's movement.
+
+#### Interface
+* The Raspberry Pi communicates with the ultrasonic sensors using GPIO pins for trigger and echo pins.
+    * Based on the sensor data, the Raspberry Pi calculates navigation command for the motors and sends control signals to the motor drivers using GPIO pins and PWM for speed control.
+* Motor drivers control the direction and speed of the motors, which in turn move the Microbull based on the Raspberry Pi's instructions.
+* The power bank supplies power to the Raspberry Pi and other components directly, while the DC-DC converter regulates voltage for the motor driver.
 
 ## Flowchart of System Design
 
@@ -31,7 +79,9 @@ This should be a more detailed explanation of how your hardware will work. This 
 | [USB Li-Ion Power Bank with 2 x 5V Outputs @ 2.1A - 5000mAh](https://www.adafruit.com/product/4288) | $26.95 | 1 | $26.95 |
 | [DC Gearbox Motor - "TT Motor" - 200RPM - 3 to 6VDC](https://www.adafruit.com/product/3777?gad_source=1) | $2.95 | 4 | $11.80 |
 | [Adafruit DRV8833 DC/Stepper Motor Driver Breakout Board](https://www.adafruit.com/product/3297) | $5.95 | 2 | $11.90 |
-| | | **Total** | **$** |
+|[4942 - Non-Isolated PoL Module DC DC Converter 1 Output 6V 1.4A 1.3V - 16V Input](https://www.digikey.com/en/products/detail/pololu-corporation/4942/19235996)|$4.95|1|$4.95|
+|[USB-AP-S-RA - USB 2.0 Plug Connector](https://www.digikey.com/en/products/detail/adam-tech/USB-AP-S-RA/9832306)|$0.55|2|$1.10|
+| | | **Total** | **$127.50** |
 
 ### Custom Creation
 
